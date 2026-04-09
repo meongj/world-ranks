@@ -1,4 +1,5 @@
 import {ButtonFilter} from "@/components/ButtonFilter";
+import {CountryTable} from "@/components/CountryTable";
 import {HeroSection} from "@/components/HeroSection";
 import {SearchInput} from "@/components/SearchInput";
 import {SortSelect} from "@/components/SortSelect";
@@ -33,8 +34,7 @@ function HomePage() {
                   <StatusFilter />
                 </aside>
                 <div className="flex-1">
-                  {/* CountryTable 들어올 자리 */}
-                  <p className="text-[#6C727F]">Table</p>
+                  <CountryTable />
                 </div>
               </div>
             </div>
