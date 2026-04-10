@@ -35,19 +35,19 @@ interface CountryTableProps {
 }
 
 export function CountryTable({countries}: CountryTableProps) {
-  const columnVisibility = () => ({
-    flag: true,
-    name: true,
-    population: true,
-    area: true, // TODO: 모바일고려
-    region: true, // TODO: 모바일고려
-  });
-
   const table = useReactTable({
     data: countries,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    state: columnVisibility,
+    state: {
+      columnVisibility: {
+        flag: true,
+        name: true,
+        population: true,
+        area: true, // TODO: 모바일고려
+        region: true, // TODO: 모바일고려
+      },
+    },
   });
 
   return (
@@ -63,7 +63,7 @@ export function CountryTable({countries}: CountryTableProps) {
       </TableHeader>
       <TableBody>
         {table.getRowModel().rows.map((row) => (
-          <TableRow key={row.original.cca3}>
+          <TableRow key={row.id}>
             {row.getVisibleCells().map((cell) => (
               <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
             ))}

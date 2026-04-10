@@ -56,5 +56,6 @@ export function applyFilters(countries: Country[], filters: CountryFilters): Cou
   result = filterBySearch(result, filters.search);
   result = filterByRegions(result, filters.regions);
   result = filterByStatus(result, filters);
+  result = sortCountries(result, filters.sortBy);
   return result;
 }

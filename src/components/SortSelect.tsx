@@ -1,10 +1,16 @@
+import {SortField} from "@/types/country";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "./ui/select";
 
-export function SortSelect() {
+interface SortSelectProps {
+  value: SortField;
+  onChange: (value: SortField) => void;
+}
+
+export function SortSelect({value, onChange}: SortSelectProps) {
   return (
     <div>
       <p className="text-xs text-muted-foreground mb-2">Sort by</p>
-      <Select>
+      <Select value={value} onValueChange={(v) => onChange(v as SortField)}>
         <SelectTrigger className="w-full border-border bg-background text-foreground  [&>span]:text-foreground">
           <SelectValue placeholder="Population" className="text-foreground" />
         </SelectTrigger>
