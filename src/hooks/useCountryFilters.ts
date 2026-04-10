@@ -6,6 +6,7 @@ const DEFAULT_FILTERS: CountryFilters = {
   search: "",
   sortBy: "population",
   regions: [],
+  // 기본이 체크 안함
   unMember: false,
   independent: false,
 };

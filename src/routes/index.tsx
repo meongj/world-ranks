@@ -44,12 +44,17 @@ function HomePage() {
                   {/* CardBody - 다음 스텝에서 채움 */}
                   <div className="flex flex-col xl:flex-row gap-6">
                     <aside className="w-full xl:w-[240px] shrink-0 flex flex-col gap-10">
-                      <SortSelect />
-                      <ButtonFilter />
-                      <StatusFilter />
+                      <SortSelect value={filters.sortBy} onChange={setSortBy} />
+                      <ButtonFilter selected={filters.regions} onToggle={toggleRegion} />
+                      <StatusFilter
+                        unMember={filters.unMember}
+                        toggleIndependent={filters.independent}
+                        onToggleUnMember={toggleUnMember}
+                        onToggleIndependent={toggleIndependent}
+                      />
                     </aside>
                     <div className="flex-1">
-                      <CountryTable countries={countries} />
+                      <CountryTable countries={filteredCountries} />
                     </div>
                   </div>
                 </div>

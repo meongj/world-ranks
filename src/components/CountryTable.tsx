@@ -9,6 +9,7 @@ const columns = [
   columnHelper.accessor("flags", {
     id: "flag",
     header: "Flag",
+    size: 100,
     cell: (info) => (
       <img src={info.getValue().png} alt={info.getValue().alt ?? ""} className="w-12 h-8 rounded object-cover" />
     ),
@@ -16,17 +17,21 @@ const columns = [
   columnHelper.accessor("name.common", {
     id: "name",
     header: "Name",
+    size: 200,
   }),
   columnHelper.accessor("population", {
     header: "Population",
+    size: 150,
     cell: (info) => info.getValue().toLocaleString(),
   }),
   columnHelper.accessor("area", {
     header: "Area (km²)",
+    size: 150,
     cell: (info) => info.getValue().toLocaleString(),
   }),
   columnHelper.accessor("region", {
     header: "Region",
+    size: 150,
   }),
 ];
 
@@ -51,12 +56,14 @@ export function CountryTable({countries}: CountryTableProps) {
   });
 
   return (
-    <Table>
+    <Table className="table-fixed w-fill">
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <TableHead key={header.id}>{flexRender(header.column.columnDef.header, header.getContext())}</TableHead>
+              <TableHead key={header.id} style={{width: header.getSize()}}>
+                {flexRender(header.column.columnDef.header, header.getContext())}
+              </TableHead>
             ))}
           </TableRow>
         ))}

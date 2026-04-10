@@ -1,7 +1,14 @@
 import {Checkbox} from "./ui/checkbox";
 import {Field, FieldGroup, FieldLabel, FieldLegend, FieldSet} from "./ui/field";
 
-export function StatusFilter() {
+interface StatusFilterProps {
+  unMember: boolean;
+  independent: boolean;
+  onToggleUnMember: () => void;
+  onToggleIndependent: () => void;
+}
+
+export function StatusFilter({unMember, independent, onToggleUnMember, onToggleIndependent}: StatusFilterProps) {
   return (
     <FieldSet>
       <FieldLegend variant="label">Status</FieldLegend>
@@ -10,7 +17,8 @@ export function StatusFilter() {
           <Checkbox
             id="finder-pref-9k2-hard-disks-ljj-checkbox"
             name="finder-pref-9k2-hard-disks-ljj-checkbox"
-            defaultChecked
+            checked={unMember}
+            onCheckedChange={onToggleUnMember}
           />
           <FieldLabel htmlFor="finder-pref-9k2-hard-disks-ljj-checkbox" className="font-normal">
             Member of the United Nations
@@ -20,7 +28,8 @@ export function StatusFilter() {
           <Checkbox
             id="finder-pref-9k2-external-disks-1yg-checkbox"
             name="finder-pref-9k2-external-disks-1yg-checkbox"
-            defaultChecked
+            checked={independent}
+            onCheckedChange={onToggleIndependent}
           />
           <FieldLabel htmlFor="finder-pref-9k2-external-disks-1yg-checkbox" className="font-normal">
             Independent
