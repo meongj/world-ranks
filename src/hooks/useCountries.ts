@@ -7,12 +7,13 @@ import {useSuspenseQuery} from "@tanstack/react-query";
 export function useCountries() {
   return useSuspenseQuery({
     queryKey: ["countries"],
-    queryFn: () =>
-      api
+    queryFn: async () => {
+      return api
         .get<
           Country[]
         >("/all?fields=name,population,area,borders,flags,independent,unMember,continents,region,subregion")
-        .then((res) => res.data),
+        .then((res) => res.data);
+    },
     staleTime: 1000 * 60 * 60 * 24, // 24시간
   });
 }
