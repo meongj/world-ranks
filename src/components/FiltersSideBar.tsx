@@ -24,7 +24,7 @@ export function FiltersSideBar({
       <ButtonFilter selected={filters.regions} onToggle={toggleRegion} />
       <StatusFilter
         unMember={filters.unMember}
-        toggleIndependent={filters.independent}
+        independent={filters.independent}
         onToggleUnMember={toggleUnMember}
         onToggleIndependent={toggleIndependent}
       />
