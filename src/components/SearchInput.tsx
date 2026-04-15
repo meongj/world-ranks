@@ -18,7 +18,7 @@ export function SearchInput({onSearch}: SearchInputProps) {
   };
 
   return (
-    <InputGroup className="max-w-xs ">
+    <InputGroup className="w-full">
       <InputGroupAddon>
         <Search />
       </InputGroupAddon>

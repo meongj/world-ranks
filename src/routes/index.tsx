@@ -1,8 +1,5 @@
-import {ButtonFilter} from "@/components/ButtonFilter";
 import {HeroSection} from "@/components/HeroSection";
 import {SearchInput} from "@/components/SearchInput";
-import {SortSelect} from "@/components/SortSelect";
-import {StatusFilter} from "@/components/StatusFilter";
 
 import {createFileRoute} from "@tanstack/react-router";
 import {ErrorBoundary, Suspense} from "@suspensive/react";
@@ -11,13 +8,14 @@ import {Skeleton} from "@/components/ui/skeleton";
 import {CountryCount} from "@/components/CountryCount";
 import {CountryTableSection} from "@/components/CountryTableSection";
 import {CountryTableSkeleton} from "@/components/CountryTableSkeleton";
+import {FiltersSideBar} from "@/components/FiltersSideBar";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
 function HomePage() {
-  const {filters, setSearch, setSortBy, toggleRegion, toggleUnMember, toggleIndependent} = useCountryFilters(undefined); // 구조분해할당
+  const {filters, setSearch, setSortBy, toggleRegion, toggleUnMember, toggleIndependent} = useCountryFilters(); // 구조분해할당
 
   return (
     <main className="min-h-screen">
@@ -40,16 +38,13 @@ function HomePage() {
 
               {/* CardBody - 다음 스텝에서 채움 */}
               <div className="flex flex-col xl:flex-row gap-6">
-                <aside className="w-full xl:w-[240px] shrink-0 flex flex-col gap-10">
-                  <SortSelect value={filters.sortBy} onChange={setSortBy} />
-                  <ButtonFilter selected={filters.regions} onToggle={toggleRegion} />
-                  <StatusFilter
-                    unMember={filters.unMember}
-                    toggleIndependent={filters.independent}
-                    onToggleUnMember={toggleUnMember}
-                    onToggleIndependent={toggleIndependent}
-                  />
-                </aside>
+                <FiltersSideBar
+                  filters={filters}
+                  setSortBy={setSortBy}
+                  toggleRegion={toggleRegion}
+                  toggleUnMember={toggleUnMember}
+                  toggleIndependent={toggleIndependent}
+                />
                 <div className="flex-1">
                   <ErrorBoundary
                     fallback={({error, reset}) => (

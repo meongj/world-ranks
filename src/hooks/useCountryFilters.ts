@@ -1,6 +1,5 @@
 import {Country, CountryFilters, Region, SortField} from "@/types/country";
-import {applyFilters} from "@/utils/countryFilters";
-import {useMemo, useState} from "react";
+import {useState} from "react";
 
 const DEFAULT_FILTERS: CountryFilters = {
   search: "",
@@ -11,14 +10,8 @@ const DEFAULT_FILTERS: CountryFilters = {
   independent: false,
 };
 
-export function useCountryFilters(countries: Country[] | undefined) {
+export function useCountryFilters() {
   const [filters, setFilters] = useState<CountryFilters>(DEFAULT_FILTERS);
-
-  // filters값의 변화를 감지해서 데이터 필터링 반환
-  const filteredCountries = useMemo(() => {
-    if (!countries) return [];
-    return applyFilters(countries, filters);
-  }, [countries, filters]);
 
   const setSearch = (search: string) => {
     setFilters((prev) => ({...prev, search}));
@@ -47,7 +40,6 @@ export function useCountryFilters(countries: Country[] | undefined) {
 
   return {
     filters,
-    filteredCountries,
     setSearch,
     setSortBy,
     toggleRegion,
