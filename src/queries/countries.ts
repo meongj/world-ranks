@@ -16,9 +16,10 @@ export const countryQueries = {
     queryOptions({
       queryKey: countryKeys.all,
       queryFn: async () => {
-        await api
-          .get<Country[]>("/all?fields=cc3,name,population,area,borders,flags,independent,unMember,region,subregion")
-          .then((res) => res.data);
+        const res = await api.get<Country[]>(
+          "/all?fields=cca3,name,population,area,borders,flags,independent,unMember,region,subregion",
+        );
+        return res.data;
       },
       staleTime: DAY,
     }),
@@ -26,7 +27,7 @@ export const countryQueries = {
     queryOptions({
       queryKey: countryKeys.detail(code),
       queryFn: async () => {
-        await api.get<Country[]>(
+        return await api.get<Country[]>(
           `/alpha?codes=${code}&fields=cca3,name,capital,population,area,borders,flags,independent,unMember,languages,currencies,region,subregion`,
         );
       },
@@ -36,7 +37,7 @@ export const countryQueries = {
   borders: (codes: string[]) =>
     queryOptions({
       queryKey: countryKeys.borders(codes),
-      queryFn: async () => await api.get<Country[]>(`/alpha?codes=${codes.join(",")}&fields=cca3,name,flags`).data,
+      queryFn: async () => await api.get<Country[]>(`/alpha?codes=${codes.join(",")}&fields=cca3,name,flags`),
       staleTime: DAY,
       enabled: codes.length > 0,
     }),
