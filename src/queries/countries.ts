@@ -38,7 +38,10 @@ export const countryQueries = {
   borders: (codes: string[]) =>
     queryOptions({
       queryKey: countryKeys.borders(codes),
-      queryFn: async () => await api.get<Country[]>(`/alpha?codes=${codes.join(",")}&fields=cca3,name,flags`),
+      queryFn: async () => {
+        const res = await api.get<Country[]>(`/alpha?codes=${codes.join(",")}&fields=cca3,name,flags`);
+        return res.data;
+      },
       staleTime: DAY,
       enabled: codes.length > 0,
     }),
