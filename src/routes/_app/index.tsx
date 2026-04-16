@@ -14,7 +14,7 @@ export const Route = createFileRoute("/_app/")({
 });
 
 function HomePage() {
-  const {filters, setSearch, setSortBy, toggleRegion, toggleUnMember, toggleIndependent} = useCountryFilters(); // 구조분해할당
+  const {filters, dispatch} = useCountryFilters(); // 구조분해할당
 
   return (
     <>
@@ -26,18 +26,12 @@ function HomePage() {
           </Suspense>
         </ErrorBoundary>
         <div className="w-full md:w-[300px]">
-          <SearchInput onSearch={setSearch} />
+          <SearchInput dispatch={dispatch} />
         </div>
       </div>
       {/* CardBody - 다음 스텝에서 채움 */}
       <div className="flex flex-col xl:flex-row gap-6">
-        <FiltersSideBar
-          filters={filters}
-          setSortBy={setSortBy}
-          toggleRegion={toggleRegion}
-          toggleUnMember={toggleUnMember}
-          toggleIndependent={toggleIndependent}
-        />
+        <FiltersSideBar filters={filters} dispatch={dispatch} />
         <div className="flex-1">
           <ErrorBoundary
             fallback={({error, reset}) => (

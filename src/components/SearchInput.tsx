@@ -2,15 +2,19 @@ import {Search} from "lucide-react";
 import {InputGroup, InputGroupAddon, InputGroupInput} from "./ui/input-group";
 import {useMemo, useState} from "react";
 import {debounce} from "es-toolkit";
+import {filterActions, FilterDispatch} from "@/hooks/useCountryFilters";
 
 interface SearchInputProps {
-  onSearch: (value: string) => void;
+  dispatch: FilterDispatch;
 }
 
-export function SearchInput({onSearch}: SearchInputProps) {
+export function SearchInput({dispatch}: SearchInputProps) {
   const [value, setValue] = useState("");
 
-  const debouncedSearch = useMemo(() => debounce(onSearch, 300), [onSearch]);
+  const debouncedSearch = useMemo(
+    () => debounce((query: string) => dispatch(filterActions.setSearch(query)), 300),
+    [dispatch],
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
