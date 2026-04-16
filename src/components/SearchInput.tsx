@@ -1,6 +1,6 @@
 import {Search} from "lucide-react";
 import {InputGroup, InputGroupAddon, InputGroupInput} from "./ui/input-group";
-import {useCallback, useState} from "react";
+import {useMemo, useState} from "react";
 import {debounce} from "es-toolkit";
 
 interface SearchInputProps {
@@ -10,7 +10,7 @@ interface SearchInputProps {
 export function SearchInput({onSearch}: SearchInputProps) {
   const [value, setValue] = useState("");
 
-  const debouncedSearch = useCallback((query: string) => debounce(onSearch, 300)(query), [onSearch]);
+  const debouncedSearch = useMemo(() => debounce(onSearch, 300), [onSearch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
