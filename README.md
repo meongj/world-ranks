@@ -1,3 +1,6 @@
+
+
+
 # WorldRanks
 
 REST Countries API 기반의 국가 순위 조회 애플리케이션입니다.
@@ -5,6 +8,13 @@ REST Countries API 기반의 국가 순위 조회 애플리케이션입니다.
 
 
 ## 스크린샷
+<div class="flex">
+<img width="1420" height="687" alt="image" src="https://github.com/user-attachments/assets/404251d0-40d4-4759-a5db-1e9315bd810e" />
+<img width="880" height="677" alt="image" src="https://github.com/user-attachments/assets/3c998cab-81c3-4bea-99ef-db3120f6c8ce" />
+
+</div>
+
+
 > 🇰🇷 [배포 사이트](https://world-ranks-ashy.vercel.app/)
 
 
