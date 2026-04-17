@@ -1,8 +1,9 @@
 import {Country} from "@/types/country";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "./ui/table";
 import {flexRender, createColumnHelper, getCoreRowModel, useReactTable} from "@tanstack/react-table";
-import {useMemo} from "react";
 import {useNavigate} from "@tanstack/react-router";
+import {useMediaQuery} from "@/hooks/useMediaQuery";
+import {BREAKPOINTS} from "@/constants/breakpoints";
 
 const columnHelper = createColumnHelper<Country>();
 
@@ -42,23 +43,22 @@ interface CountryTableProps {
 
 export function CountryTable({countries}: CountryTableProps) {
   const navigate = useNavigate();
+  // 반응형 레이아웃 지원
+  const isDesktop = useMediaQuery(BREAKPOINTS.lg);
+
   const table = useReactTable({
     data: countries,
     columns,
     getCoreRowModel: getCoreRowModel(),
     state: {
       columnVisibility: {
-        flag: true,
-        name: true,
-        population: true,
-        area: true, // TODO: 모바일고려
-        region: true, // TODO: 모바일고려
+        region: isDesktop,
       },
     },
   });
 
   return (
-    <Table className="table-fixed w-fill">
+    <Table className="w-fill">
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
