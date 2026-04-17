@@ -41,7 +41,7 @@ function filterReducer(
     case 'SET_SEARCH':
       return { ...state, search: action.payload };
     case 'SET_SORT':
-      return { ...state, search: action.payload };
+      return { ...state, sortBy: action.payload };
     case 'TOGGLE_REGION':
       return {
         ...state,

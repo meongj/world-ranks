@@ -14,7 +14,7 @@ export function filterBySearch(
   // 관대한 매칭
   const fuse = new Fuse(countries, {
     keys: ['name.common', 'region', 'subregion'],
-    threshold: 0.4, // 0=완전일치, 1=전부매칭. 0.4면 적당히 관대
+    threshold: 0.2, // 0=완전일치, 1=전부매칭. 0.4면 적당히 관대
     ignoreLocation: true, // 문자열 위치 무관하게 검색
   });
 
